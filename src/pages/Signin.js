@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "leaflet/dist/leaflet.css";
-import {  myIcon  } from '../components/icon';
+import {  markerIcon  } from '../components/icon';
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { data } from 'autoprefixer';
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2FjcGVyaGFoYSIsImEiOiJjbGFodzVvNncwOTRiM29ud2FzN2hycjFlIn0.ryq7YA88KOqgXPsbBXozng';
@@ -15,8 +15,12 @@ function LogIn(username, password) {
     password: password
   })
   .then(function (response) {
-    response.data.status ? console.log(`ez`) : console.log(`ez2`);
-  })
+    if(response.status === 200) {
+      console.log(response.data);
+      // localStorage.setItem('token', response.data.token);
+      // localStorage.setItem('user', JSON.stringify(response.data.user));
+      
+}})
   .catch(function (error) {
     console.log(error);
   });
@@ -44,8 +48,16 @@ const onSubmit = data => LogIn(data.username, data.password);
   <div className="flex flex-col items-center justify-center">
     <span className="text-3xl font-bold text-center text-[#00a3ff]">Sign in</span>
     <form className="flex flex-col items-center justify-center mt-4 gap-2" onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" placeholder="Username" className="w-72 h-10 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 text-[#00a3ff] font-bold text-xl focus:outline-none"  {...register("username")} />
-      <input type="password" placeholder="Password" className="w-72 h-10 bg-[#f2f2f2] border-black rounded-lg border-[1px] pl-4 text-[#00a3ff] font-bold text-xl focus:outline-none mt-4" {...register("password")} />
+      {/* <input type="text" placeholder="Username" className="w-72 h-10 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 text-[#00a3ff] font-bold text-xl focus:outline-none"  {...register("username")} /> */}
+      <div className="relative">
+        <input type="text" placeholder="username" id="username" className="placeholder:opacity-0 peer w-72 h-10 pt-2 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 text-[#00a3ff] font-bold text-lg focus:outline-none"  {...register("username")} />
+        <label htmlFor="username" className="text-[#6e7680] select-none placeholder-opacity-0 absolute left-4 peer-focus:top-0 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-sm font-bold text-sm transition-all">Username</label>
+      </div>
+      <div className="relative">
+        <input type="password" id="password" placeholder="Password" className="placeholder:opacity-0 peer w-72 h-10 pt-2 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 text-[#00a3ff] font-bold text-lg focus:outline-none"  {...register("password")} />
+        <label htmlFor="password" className="text-[#6e7680] placeholder-opacity-0 absolute left-4 peer-focus:top-0 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-sm font-bold text-sm transition-all">Password</label>
+      </div>
+      {/* <input type="password" placeholder="Password" className="w-72 h-10 bg-[#f2f2f2] border-black rounded-lg border-[1px] pl-4 text-[#00a3ff] font-bold text-xl focus:outline-none mt-4" {...register("password")} /> */}
       <button className="w-72 h-10 bg-[#00a3ff] rounded-xl shadow-2xl pl-4 text-white font-bold text-xl focus:outline-none mt-4 hover:bg-[#0091e6] " >Sign in</button>
     </form>
     <span> Need an account? <u onClick={() => {navigate(`/signup`)}}>Sign up</u></span>
@@ -61,7 +73,7 @@ const onSubmit = data => LogIn(data.username, data.password);
       url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
     />
     {markers.map(marker =>
-              <Marker position={[marker.lat, marker.lng]} icon={myIcon}>
+              <Marker position={[marker.lat, marker.lng]} icon={markerIcon}>
                 <Popup>
                   {marker.name}
                 </Popup>

@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet' 
 import axios from 'axios';
 import "leaflet/dist/leaflet.css";
-import {  myIcon  } from '../components/icon';
+import {  markerIcon  } from '../components/icon';
 import { useNavigate } from "react-router-dom";
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 mapboxgl.accessToken = 'pk.ey J1Ijoia2FjcGVyaGFoYSIsImEiOiJjbGFodzVvNncwOTRiM29ud2FzN2hycjFlIn0.ryq7YA88KOqgXPsbBXozng';
@@ -36,7 +36,7 @@ axios.get(`http://localhost:80/api/markers/get`)
       url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
     />
     {markers.map(marker =>
-              <Marker position={[marker.lat, marker.lng]} icon={myIcon}>
+              <Marker position={[marker.lat, marker.lng]} icon={markerIcon}>
                 <Popup>
                   {marker.name}
                 </Popup>
