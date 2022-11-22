@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-function RegisterAccount(email, username, password) {
+function RegisterAccount(email, username, password, navigate) {
 axios.post('http://localhost:80/api/auth/register', {
     email: email,
     name: username,
@@ -9,6 +9,7 @@ axios.post('http://localhost:80/api/auth/register', {
   })
   .then(function (response) {
     console.log(response);
+
   })
   .catch(function (error) {
     console.log(error);
@@ -20,7 +21,7 @@ axios.post('http://localhost:80/api/auth/register', {
 export default function SignUpForm() {
 const navigate = useNavigate();
 const { register, handleSubmit } = useForm();
-const onSubmit = data => RegisterAccount(data.email, data.username, data.password);
+const onSubmit = data => RegisterAccount(data.email, data.username, data.password, navigate);
     return (
         <>
 <div className="flex h-[30rem] w-96 bg-white absolute z-[200] top-0 right-0 bottom-0 rounded-xl left-0 m-auto items-center justify-center animate-SlideUp ">
