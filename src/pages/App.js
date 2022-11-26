@@ -17,13 +17,8 @@ const [zoom, setZoom] = useState(13);
 const [markers, setMarkers] = useState([]);
 const token = localStorage.getItem("token");
 useEffect(() => {
-axios.get(`http://localhost:80/api/markers/get`, 		{
-    headers: {
-        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-})
+axios.get(`http://localhost:80/api/markers/get`)
 .then(res => {
-
   const markers = res.data;
   setMarkers(markers);
 })
