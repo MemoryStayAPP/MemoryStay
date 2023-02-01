@@ -1,10 +1,10 @@
 import L from 'leaflet';
-import marker from '../assets/marker-icon.png';
+import marker from '../assets/svg/marker-icon.svg';
 const markerIcon = new L.Icon({
     iconUrl: marker,
     iconRetinaUrl: marker,
     popupAnchor:  [-0, -0],
-    iconSize: [48,48],     
+    iconSize: [36,36],
 });
 
 export { markerIcon };
