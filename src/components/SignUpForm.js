@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg';
 function RegisterAccount(email, username, password, navigate, Seterror) {
 axios.post('http://localhost:80/api/auth/register', {
     email: email,
@@ -45,6 +46,9 @@ const onSubmit = (data) => {
     return (
         <>
 <div className="flex h-[30rem] w-96 bg-white absolute z-[200] top-0 right-0 bottom-0 rounded-xl left-0 m-auto items-center justify-center animate-SlideUp ">
+  <div className="absolute top-0 right-0 m-4">
+    <CloseIcon onClick={() => {navigate(`/`)}} className="cursor-pointer w-6 h-6" />
+  </div>
   <div className="flex flex-col items-center justify-center animate-FadeIn">
     <span className="text-3xl font-bold text-center text-[#00a3ff]">Sign up</span>
     <form className="flex flex-col items-center justify-center mt-4 gap-2" onSubmit={handleSubmit(onSubmit)}>

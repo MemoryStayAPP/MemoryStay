@@ -2,6 +2,7 @@ import { useNavigate , Navigate} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg'; 
 import ErrorStatusMessage from "../utils/ErrorStatusCSS";
 export default function SignInForm() {
 const navigate = useNavigate();
@@ -39,13 +40,13 @@ function LogIn(username, password, navigate) {
 })
     .catch(function (reqerror) {
       Seterror({status:reqerror.response.status, message:reqerror.response.data.message, passwordcss:null, emailcss:null})
-      console.log(error);
+      console.log(reqerror);
       if(reqerror.response.data.errors.hasOwnProperty('email')){
-        Seterror({...error, css:"!text-red-500 border-red-500"})
+        Seterror({...error, emailcss:"!text-red-500 border-red-500"})
         }
         if(reqerror.response.data.errors.hasOwnProperty('password')){
-          Seterror({...error, css:"!text-red-500 border-red-500"})
-            console.log(error)
+          Seterror({...error, passwordcss:"!text-red-500 border-red-500"})
+            console.log(reqerror.response.data.errors)
         }
         console.log(error)
     });
@@ -53,6 +54,9 @@ function LogIn(username, password, navigate) {
 return (
   <>
   <div className="absolute flex h-[30rem] w-96 bg-white z-[200] top-0 right-0 bottom-0 rounded-xl left-0 m-auto items-center justify-center animate-SlideUp ">
+  <div className="absolute top-0 right-0 m-4">
+    <CloseIcon onClick={() => {navigate(`/`)}} className="cursor-pointer w-6 h-6 transition-all hover:scale-110" />
+  </div>
       <div className="flex flex-col items-center justify-center animate-FadeIn">
         <span className="text-3xl font-bold text-center text-[#00a3ff]">Sign in</span>
         <form className="flex flex-col items-center justify-center mt-4 gap-2" onSubmit={handleSubmit(onSubmit)}>
