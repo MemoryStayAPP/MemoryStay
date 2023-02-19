@@ -24,7 +24,7 @@ const onSubmit = (data) => {
 }
 function LogIn(username, password, navigate) {
 
-    axios.post('http://localhost:80/api/auth/login',{
+    axios.post('localhost:10000/api/auth/login',{
       email: username.toLowerCase() || username,
       password: password  
     }, {headers: { 'Content-Type': 'application/json'}}
