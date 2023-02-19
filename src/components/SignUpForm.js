@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useState, useEffect } from "react";
 function RegisterAccount(email, username, password, navigate, Seterror) {
-axios.post('localhost/api/auth/register', {
+axios.post('localhost:10000/api/auth/register', {
     email: email,
     name: username,
     password: password

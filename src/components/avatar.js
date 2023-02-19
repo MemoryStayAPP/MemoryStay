@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const Avatar = function() {
 const [user, setUser] = useState({});
 function GetUser() {
-  axios.post('localhost/api/auth/getuser',{
+  axios.post('localhost:10000/api/auth/getuser',{
     token: sessionStorage.getItem('token'),
   },{
     headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
