@@ -18,7 +18,7 @@ const [zoom, setZoom] = useState(13);
 const [markers, setMarkers] = useState([]); 
 const token = sessionStorage.getItem("token");
 useEffect(() => {
-axios.get(`http://localhost:80/api/markers/get`)
+axios.get(`localhost/api/markers/get`)
 .then(res => {
   const markers = res.data;
   setMarkers(markers);
