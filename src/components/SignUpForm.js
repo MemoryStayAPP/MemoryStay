@@ -6,7 +6,7 @@ import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg';
 function RegisterAccount(email, username, password, navigate, Seterror) {
 axios.post('localhost:10000/api/auth/register', {
     email: email,
-    name: username,
+    username: username,
     password: password
   }, {headers: { 'Content-Type': 'application/json'}})
   .then(function (response) {
