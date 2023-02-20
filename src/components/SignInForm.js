@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg'; 
 import ErrorStatusMessage from "../utils/ErrorStatusCSS";
+import serverLaravel from "../configs/general.config";
 export default function SignInForm() {
 const navigate = useNavigate();
 const { register, handleSubmit, getValues, watch } = useForm();
@@ -25,14 +26,13 @@ const onSubmit = (data) => {
 }
 function LogIn(username, password, navigate) {
 
-    axios.post('localhost:10000/api/auth/login',{
+    axios.post(`${serverLaravel.url}/api/auth/login`,{
       username: username.toLowerCase() || username,
       password: password  
     }, {headers: { 'Content-Type': 'application/json'}}
 )
     .then(function (response) {
       if(response.status === 200) {
-        console.log(response)
         sessionStorage.setItem('token', response.data.token);
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         navigate(`/`);

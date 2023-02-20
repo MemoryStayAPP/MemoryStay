@@ -1,15 +1,15 @@
 import axios from 'axios';
+import serverLaravel from '../configs/general.config';
 import { useEffect, useState } from 'react';
 import { ProfileCard } from '../components/profileCard';
 const Avatar = function() {
   const [toggle, setToggle] = useState(false);
 const handleClick = () => {
   setToggle(!toggle);
-  console.log(`ez`);
 };
 const [user, setUser] = useState({});
 function GetUser() {
-  axios.post('localhost:10000/api/auth/getuser',{
+  axios.post(`${serverLaravel.url}/api/auth/getuser`,{
     token: sessionStorage.getItem('token'),
   },{
     headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }

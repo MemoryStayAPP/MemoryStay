@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import ErrorStatusMessage from "../utils/ErrorStatusCSS";
+import serverLaravel from '../configs/general.config';
 export function AddMarker() {
 const navigate = useNavigate();
+
 const { register, handleSubmit, getValues, watch } = useForm();
 const [error, Seterror] = useState()
 const [datavalues, setValues] = useState("")
@@ -27,7 +29,7 @@ const onSubmit = (data) => {
 }
 function CreateMarker(name, latitude, longtitude, description, navigate) {
 
-    axios.post('localhost:10000/api/markers/create',{
+    axios.post(`${serverLaravel.url}/api/markers/create`,{
       name: name,
       lat: latitude,
       lng: longtitude,

@@ -1,5 +1,6 @@
+import serverLaravel from "../configs/general.config";
 export default function getMarkers(axios, setMarkers) {
-axios.get(`localhost:10000/api/markers/get`)
+axios.get(`${serverLaravel.url}/api/markers/get`)
 .then(res => {
   const markers = res.data;
   setMarkers(markers);
