@@ -8,7 +8,7 @@ const searchControl = new GeoSearchControl({
     provider: new OpenStreetMapProvider(),
     style: 'bar',
     position: 'topleft',
-    showMarker: true,
+    showMarker: false,
     showPopup: true,
     autoClose: false,
     retainZoomLevel: false,

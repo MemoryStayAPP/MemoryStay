@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg';
+import ServerLaravel from "../configs/general.config";
 function RegisterAccount(email, username, password, navigate, Seterror) {
-axios.post('localhost:10000/api/auth/register', {
+axios.post(`${ServerLaravel.url}/api/auth/register`, {
     email: email,
     username: username,
     password: password
