@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg';
 function RegisterAccount(email, username, password, navigate, Seterror) {
-axios.post('http://localhost:80/api/auth/register', {
+axios.post('localhost:10000/api/auth/register', {
     email: email,
     name: username,
     password: password
