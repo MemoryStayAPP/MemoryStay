@@ -22,10 +22,10 @@ function GetUser() {
 //   .catch(function (error) {
 //     console.log(error);
 //   });
-}
+})}
 useEffect(() => {
 GetUser()
-}, []);
+}, [])
 const firstletter = user.name?.charAt(0).toUpperCase();
   return (
     <><div onClick={() => handleClick()} className="w-10 h-10 bg-white rounded-full absolute z-50 top-4 right-4 shadow-2xl flex items-center justify-center cursor-pointer divide-solid  hover:outline-2 hover:outline-black">
