@@ -9,11 +9,11 @@ const handleClick = () => {
 };
 const [user, setUser] = useState({});
 function GetUser() {
-//   axios.post('http://localhost:80/api/auth/getuser',{
-//     token: sessionStorage.getItem('token'),
-//   },{
-//     headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
-// }).then(function (response) {
+  axios.post('localhost:10000/api/auth/getuser',{
+    token: sessionStorage.getItem('token'),
+  },{
+    headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+}).then(function (response) {
 
 //     if(response.status === 200) {
 //       console.log(response)
