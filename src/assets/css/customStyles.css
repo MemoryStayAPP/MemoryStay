@@ -1,3 +1,33 @@
 .leaflet-bar a:hover{
     color: #00a3ff;
 }
+.leaflet-contextmenu-item {
+    display: block;
+    padding: 3px 20px;
+    cursor: pointer;
+  }
+.leaflet-contextmenu {
+    display: none;
+    position: absolute;
+    z-index: 10000;
+    min-width: 100px;
+    padding: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+  }
+  
+  .leaflet-contextmenu .leaflet-popup-content {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .leaflet-contextmenu .leaflet-popup-content-wrapper {
+    padding: 5px;
+  }
+  
+  .leaflet-contextmenu .leaflet-popup-tip-container {
+    display: none;
+  }

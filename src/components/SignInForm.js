@@ -5,15 +5,16 @@ import { useState, useEffect } from "react";
 import { ReactComponent as CloseIcon } from '../assets/svg/close-icon.svg'; 
 import ErrorStatusMessage from "../utils/ErrorStatusCSS";
 import serverLaravel from "../configs/general.config";
+import { ReactComponent as ErrorIcon } from '../assets/svg/errors-icon.svg';
 export default function SignInForm() {
 const navigate = useNavigate();
 const { register, handleSubmit, getValues, watch } = useForm();
-const [error, Seterror] = useState()
+const [errors, Seterror] = useState()
 const [datavalues, setValues] = useState("")
 useEffect(() => {
   const subscription = watch((data) => {
-  console.log(error?.status)
-  console.log(data)
+  // console.log(errors?.status)
+  // console.log(data)
   if(datavalues != data) Seterror()
   })
   return () => {
@@ -39,18 +40,22 @@ function LogIn(username, password, navigate) {
   }
 })
     .catch(function (reqerror) {
-      Seterror({status:reqerror.response.status, message:reqerror.response.data.message, passwordcss:null, emailcss:null})
-      console.log(reqerror);
-      if(reqerror.response.data.data.hasOwnProperty('email')){
-        console.log(error);
-        Seterror({status:reqerror.response.status, message:reqerror.response.data.message, emailmessage:reqerror.response.data.data.email ,emailcss:"!text-red-700 !border-red-500 !bg-red-100"})
+      console.log(reqerror.response.data.message);
+      let obj = {};
+      if(reqerror.response.data.status === false && reqerror.response.data.message == "User Failed to login") { 
+        Object.assign(obj,{user:{message:reqerror.response.data.message,
+          status:reqerror.response.status}})
+      }
+      if(reqerror.response.data?.data?.hasOwnProperty('username')){
+        Object.assign(obj,{username:{message:reqerror.response.data.data.username,
+          status:reqerror.response.status}})
         }
-        if(reqerror.response.data.data.hasOwnProperty('password')){
-          console.log(error);
-          Seterror({...error, passwordcss:"!text-red-500 border-red-500"})
-            console.log(reqerror.response.data.errors)
+        if(reqerror.response.data?.data?.hasOwnProperty('password')){
+          Object.assign(obj,{password:{message:reqerror.response.data.data.password,
+            status:reqerror.response.status}})
         }
-        console.log(error)
+        console.log(obj)
+        Seterror(obj)
     });
   }
 return (
@@ -63,20 +68,26 @@ return (
         <span className="text-3xl font-bold text-center text-[#00a3ff]">Sign in</span>
         <form className="flex flex-col items-center justify-center mt-4 gap-2" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
-            <input type="text" placeholder="username" id="username" className={error?.emailcss + " " + "placeholder:opacity-0 peer w-72 h-10 pt-4 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 pr-4 text-[#00a3ff] font-bold text-base leading-5 pb-1 focus:outline-none"} {...register("username")} />
-            <label htmlFor="username" className={error?.emailcss + " " + "absolute text-[#6e7680] select-none placeholder-opacity-0 top-1 left-4 peer-focus:top-1 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-xs font-bold text-xs transition-all"}>Email</label>
-            {error?.emailcss && <div className="rounded-xl flex items-center justify-start w-full pl-2 pt-1 ">
-            {error && <span className="text-red-500 text-xs font-bold">{error.emailmessage}</span>}
+            <input type="text" id="username" placeholder="username" className={`${errors?.username ? '!border-red-500' : ''} placeholder:opacity-0 peer w-72 h-10 pt-4 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 pr-4 text-[#00a3ff] font-bold text-base leading-5 pb-1 focus:outline-none`} {...register("username")} />
+            <label htmlFor="username" className={`${errors?.username ? '!text-red-500' : ''} absolute text-[#6e7680] select-none placeholder-opacity-0 top-1 left-4 peer-focus:top-1 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-xs font-bold text-xs transition-all`}>Email</label>
+            {errors?.username && <div className="rounded-xl flex items-center justify-start w-full pl-2 pt-1 ">
+            <ErrorIcon className="h-4 w-4 fill-red-500"/>
+            {errors?.username && <span className="text-red-500 text-xs font-bold">{errors.username.message}</span>}
           </div>}
           </div>
          
           <div className="relative">
-            <input type="password" id="password" placeholder="Password" className={error?.css + " " + "placeholder:opacity-0 peer w-72 h-10 pt-4 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 pr-4 text-[#00a3ff] font-bold text-base leading-5 pb-1 focus:outline-none"} {...register("password")} />
-            <label htmlFor="password" className={error?.css + " " + "absolute text-[#6e7680] select-none placeholder-opacity-0 top-1 left-4 peer-focus:top-1 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-xs font-bold text-xs transition-all"}>Password</label>
+            <input type="password" id="password" placeholder="Password" className={`${errors?.password ? '!border-red-500' : ''} placeholder:opacity-0 peer w-72 h-10 pt-4 bg-[#f2f2f2] rounded-lg border-black border-[1px] pl-4 pr-4 text-[#00a3ff] font-bold text-base leading-5 pb-1 focus:outline-none`} {...register("password")} />
+            <label htmlFor="password" className={`${errors?.password ? '!text-red-500' : ''} absolute text-[#6e7680] select-none placeholder-opacity-0 top-1 left-4 peer-focus:top-1 peer-placeholder-shown:top-[0.44rem] peer-placeholder-shown:text-xl peer-focus:text-xs font-bold text-xs transition-all`}>Password</label>
+            {errors?.password && <div className="rounded-xl flex items-center justify-start w-full pl-2 pt-1 ">
+            <ErrorIcon className="h-4 w-4 fill-red-500"/>
+            {errors?.password && <span className="text-red-500 text-xs font-bold">{errors.password.message}</span>}
+          </div>}
           </div>
-            {/* {error?.emailcss && <div className="bg-red-400 w-72 rounded-xl w-70 flex items-center justify-center p-2">
-              {error && <span className="text-white text-sm font-bold">{error.emailmessage}</span>}
-            </div>} */}
+          {errors?.user && <div className="bg-red-400 w-72 rounded-xl flex items-center justify-center p-2">
+          <ErrorIcon className="h-4 w-4 fill-white"/>
+            {errors?.user && <span className="text-white text-sm font-bold">{errors.user.message}</span>}
+          </div>}
           <button className="w-72 h-10 bg-[#00a3ff] rounded-xl shadow-2xl pl-4 text-white font-bold text-xl focus:outline-none mt-2 hover:bg-[#0091e6] transition-all">Sign in</button>
         </form>
         <span> Need an account? <u onClick={() => { navigate(`/signup`); } }>Sign up</u></span>

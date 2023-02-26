@@ -6,6 +6,7 @@ export function MapSearch() {
 const map = useMap()
 const searchControl = new GeoSearchControl({
     provider: new OpenStreetMapProvider(),
+    notFoundMessage: 'Sorry, that address could not be found.',
     style: 'bar',
     position: 'topleft',
     showMarker: false,
