@@ -1,0 +1,18 @@
+version: '3'  
+services:
+
+  nginx:
+    image: nginx
+    build:
+      dockerfile: dockerfile
+    ports:
+    - 8081:80
+    volumes:
+      - type: volume
+        source: build
+        target: /usr/share/nginx/html
+      - type: bind
+        source: ./build
+        target: /usr/share/nginx/html
+volumes:
+  build:
