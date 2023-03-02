@@ -9,3 +9,9 @@ services:
    - ./build:/usr/share/nginx/html
   labels:
    - "traefik.http.routers.front.rule=Host(`memorystay.pl`)"
+  networks:
+    - sail
+networks:
+  sail:
+    name: sail
+    external: true
