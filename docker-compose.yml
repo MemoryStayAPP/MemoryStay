@@ -10,7 +10,4 @@ services:
   labels:
    - "traefik.http.routers.front.rule=Host(`memorystay.pl`)"
   networks:
-    - sail
-networks:
-    external: 
-      name: sail
+    - web
