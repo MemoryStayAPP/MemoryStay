@@ -12,6 +12,5 @@ services:
   networks:
     - sail
 networks:
-  sail:
-    name: sail
-    external: true
+    external: 
+      name: sail
