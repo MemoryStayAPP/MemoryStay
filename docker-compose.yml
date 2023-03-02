@@ -8,11 +8,8 @@ services:
     ports:
     - 8081:80
     volumes:
-      - type: volume
-        source: build
-        target: /usr/share/nginx/html
-      - type: bind
-        source: ./build
-        target: /usr/share/nginx/html
-volumes:
-  build:
+      - ./build:/usr/share/nginx/html
+    labels:
+      - "traefik.http.routers.nginx.rule=Host(`localhost`)"
+      
+
