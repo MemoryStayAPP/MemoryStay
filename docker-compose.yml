@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 services:
  nginx:
   image: nginx
@@ -9,7 +9,3 @@ services:
    - ./build:/usr/share/nginx/html
   labels:
    - "traefik.http.routers.front.rule=Host(`memorystay.pl`)"
-
-networks:
-  web_front:
-    external: 
