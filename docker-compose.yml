@@ -14,3 +14,8 @@ services:
     - "traefik.http.routers.nginx.rule=Host(`app.memorystay.pl`)"
     - "traefik.http.routers.nginx.tls=true"
     
+    - traefik.http.middlewares.nginx_https.redirectscheme.scheme=https
+    - traefik.http.routers.nginx.entrypoints=web
+    - traefik.http.routers.nginx.middlewares=nginx_https@docker
+    - traefik.http.routers.nginx_https.entrypoints=websecure
+  
