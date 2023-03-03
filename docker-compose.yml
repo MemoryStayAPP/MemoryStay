@@ -8,4 +8,4 @@ services:
   volumes:
    - ./build:/usr/share/nginx/html
   labels:
-   - "traefik.http.routers.front.rule=Host(`memorystay.pl`)"
+   - "traefik.http.routers.front.rule=Host(`app.memorystay.pl`)"
