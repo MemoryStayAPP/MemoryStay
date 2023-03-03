@@ -12,4 +12,5 @@ services:
    - ./build:/usr/share/nginx/html
   labels:
     - "traefik.http.routers.nginx.rule=Host(`app.memorystay.pl`)"
+    - "traefik.http.routers.nginx.tls=true"
     
